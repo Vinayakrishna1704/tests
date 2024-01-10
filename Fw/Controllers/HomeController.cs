@@ -25,5 +25,11 @@ namespace Fw.Controllers
 
 			return View();
 		}
+
+        public ActionResult Register()
+        {
+            ViewBag.Title = "Register page";
+            return View();
+        }
 	}
 }
