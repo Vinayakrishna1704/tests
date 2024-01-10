@@ -2,116 +2,162 @@
     Layout = null;
 }
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Login</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
-	@Scripts.Render("~/bundles/jquery")
-	@Scripts.Render("~/bundles/bootstrap")
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Apartment Rentals</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background: url('images/back.png');
+            background-size: cover;
+            background-position: full;
+            color: white;
+            padding: 70px;
+            text-align: center;
+            width: 100%;
+        }
+
+
+        section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        input {
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #343a40;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #23272b;
+            }
+
+        p {
+            margin-top: 10px;
+            text-align: center;
+            color: #343a40;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-	<style>
-		body {
-		  margin: 0;
-		  padding: 0;
-		  background-color: #17a2b8;
-		  height: 100vh;
-		}
-		#login .container #login-row #login-column #login-box {
-		  margin-top: 120px;
-		  max-width: 600px;
-		  height: 320px;
-		  border: 1px solid #9C9C9C;
-		  background-color: #EAEAEA;
-		}
-		#login .container #login-row #login-column #login-box #login-form {
-		  padding: 20px;
-		}
-		#login .container #login-row #login-column #login-box #login-form #register-link {
-		  margin-top: -85px;
-		}
+    <header>
+        <h1>Login to Apartment Rentals</h1>
+    </header>
 
-	</style>
+    <section id="login-form">
+        <form action="/login" method="post">
+            <label for="username">Username/Email:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="/registration">@Html.ActionLink("Register here","Register")</a></p>
+        <p><a href="/">Back to Home</a></p>
+    </section>
 
 
-	<div id="login">
+    <script>
 
+        function login(username, password) {
+            const loginUrl = '/token'; // Replace with your API's URL
+            const data = `grant_type=password&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
-		<h3 class="text-center text-white pt-5">Login form</h3>
-		<div class="container">
-			<div id="login-row" class="row justify-content-center align-items-center">
+            fetch(loginUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: data
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Login failed');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Assuming the token is in the 'access_token' field of the response
+                    localStorage.setItem('authToken', data.access_token);
+                    console.log('Login successful, token stored in localStorage');
+                    window.location = "/"
+                })
+                .catch(error => {
+                    console.error('Error during login:', error.message);
+                    showLoginError('Login failed: ' + error.message); // Show error toast
 
-				<div id="login-column" class="col-md-6">
-					<div id="login-box" class="col-md-12">
-
-						<form id="login-form" class="form" action="" method="post">
-							<h3 class="text-center text-info">Login</h3>
-							<div class="form-group">
-								<label for="username" class="text-info">Username:</label><br>
-								<input type="text" name="username" id="username" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="password" class="text-info">Password:</label><br>
-								<input type="text" name="password" id="password" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-								<input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-							</div>
-							<div id="register-link" class="text-right">
-								<a href="#" class="text-info">Register here</a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script>
-
-   function login(username, password) {
-    const loginUrl = '/token'; // Replace with your API's URL
-    const data = `grant_type=password&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-
-    fetch(loginUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Login failed');
+                });
         }
-        return response.json();
-    })
-    .then(data => {
-        // Assuming the token is in the 'access_token' field of the response
-        localStorage.setItem('authToken', data.access_token);
-        console.log('Login successful, token stored in localStorage');
-	    window.location="/"
-    })
-    .catch(error => {
-        console.error('Error during login:', error.message);
-		        showLoginError('Login failed: ' + error.message); // Show error toast
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-    });
-}
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+            login(username, password);
+        });
 
-    login(username, password);
-});
-
-function showLoginError(message) {
- alert(message);
-}
-	</script>
+        function showLoginError(message) {
+            alert(message);
+        }
+    </script>
 </body>
 </html>
