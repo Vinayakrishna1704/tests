@@ -1,6 +1,8 @@
 ﻿using Fw.DataAccessLayer;
 using Fw.Models;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -26,8 +28,13 @@ public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvide
 		{
 			var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 			identity.AddClaim(new Claim("username", context.UserName));
-			identity.AddClaim(new Claim("role", "user"));
-        	context.Validated(identity);
+			identity.AddClaim(new Claim("role", user.Role));
+
+            var ticket = new AuthenticationTicket(identity, null);
+            context.Validated(ticket);
+
+          
+            //context.Validated(identity);
 		}
 		else
 		{

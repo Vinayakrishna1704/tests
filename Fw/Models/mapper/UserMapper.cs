@@ -14,8 +14,8 @@ namespace Fw.Models.mapper
             user.Email = reader["email"] as string;
 			user.Password = reader["password"] as string;
 			user.Role = reader["role"] as string;
-			//user.Firstname = reader["firstname"] as string;
-			//user.Lastname = reader["lastname"] as string;
+			user.Firstname = reader["first_name"] as string;
+			user.Lastname = reader["last_name"] as string;
 			user.Status = reader.GetByte(reader.GetOrdinal("status")) != 0;
 			user.ModifiedBy = reader.GetInt32(reader.GetOrdinal("modified_by"));
 			user.ModifiedDate = reader.GetDateTime(reader.GetOrdinal("modified_at"));
