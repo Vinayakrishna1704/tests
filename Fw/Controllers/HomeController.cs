@@ -54,13 +54,10 @@ namespace Fw.Controllers
             {
                 connection.Open();
 
-<<<<<<< HEAD
-                string query = $"insert into dbo.users (status, modified_by, modified_at, role, user_name, email, phone_no, password) " +
-                    $"values (1, 1, @value, 'USER', '{fname}', '{email}', {phone}, '{password}');";
-=======
+                
                 string query = $"insert into dbo.users (status, modified_by, modified_at, role, first_name, last_name, email, phone_no, password) " +
                     $"values (1, 1, @value, 'user', '{fname}', '{lname}', '{email}', {phone}, '{password}');";
->>>>>>> c8082b174dd0891f79096c14fa18d9fd12db905d
+
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@value", DateTime.Now);
