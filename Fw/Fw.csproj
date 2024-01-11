@@ -221,6 +221,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Apartment.cs" />
     <Compile Include="Models\mapper\UserMapper.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Admin_start.cshtml" />
     <None Include="Views\Shared\Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

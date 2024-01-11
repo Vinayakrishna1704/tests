@@ -31,5 +31,9 @@ namespace Fw.Controllers
             ViewBag.Title = "Register page";
             return View();
         }
+        public ActionResult Admin_start()
+        {
+            return View();
+        }
 	}
 }

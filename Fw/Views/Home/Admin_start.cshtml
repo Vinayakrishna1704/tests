@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Villa Agency TemplateMo - Admin Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-villa-agency.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+        }
+
+            .sidebar a {
+                padding: 8px;
+                text-decoration: none;
+                font-size: 18px;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .container-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #343a40;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bg-dark">
+        <h1>Welcome, Admin!</h1>
+    </header>
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+       <!-- <a href="#" onclick="showApartmentList()">Apartment List</a>-->
+        <a href="#" onclick="showRegisteredUsers()">Registered Users</a>
+        <a href="#" onclick="showRequests()">All Requests</a>
+        <a href="#" onclick="showApartmentManagement()">Apartments</a>
+    </div>
+
+    <div class="content">
+        <div id="apartment-list" style="display: none;">
+            <h2>Apartment List</h2>
+            <!-- Display available apartment details here -->
+            <ul>
+                <li>Name: A-4-1</li>
+                <li>Advance Amount: $1000</li>
+                <li>Rental Cost: $500</li>
+                <li>Bedrooms: 2BHK</li>
+                <li>Floor Space: 800 sqft</li>
+                <li>Status: Vacant</li>
+                <li>Notice Period: 30 days</li>
+            </ul>
+            <ul>
+                <li>Name: B-2-5</li>
+                <li>Advance Amount: $1200</li>
+                <li>Rental Cost: $600</li>
+                <li>Bedrooms: 3BHK</li>
+                <li>Floor Space: 1200 sqft</li>
+                <li>Status: Rented Out</li>
+                <li>Notice Period: 45 days</li>
+            </ul>
+        </div>
+
+        <div id="registered-users" style="display: none;">
+            <h2>Registered Users</h2>
+            <!-- Display registered user details here -->
+            <ul>
+                <li>Name: John Doe</li>
+                <li>Email: john@example.com</li>
+                <li>Phone: +1 555-1234</li>
+            </ul>
+            <ul>
+                <li>Name: Jane Smith</li>
+                <li>Email: jane@example.com</li>
+                <li>Phone: +1 555-5678</li>
+            </ul>
+        </div>
+
+        <div id="requests" style="display: none;">
+            <h2>All Requests</h2>
+            <!-- Display rental requests with the ability to accept or deny -->
+            <ul>
+                <li>Name: A-4-1</li>
+                <li>Advance Amount: $1000</li>
+                <li>Rental Cost: $500</li>
+                <li>Bedrooms: 2BHK</li>
+                <li>Floor Space: 800 sqft</li>
+                <li>Status: Vacant</li>
+                <li>Notice Period: 30 days</li>
+            </ul>
+            <ul>
+                <li>Name: B-2-5</li>
+                <li>Advance Amount: $1200</li>
+                <li>Rental Cost: $600</li>
+                <li>Bedrooms: 3BHK</li>
+                <li>Floor Space: 1200 sqft</li>
+                <li>Status: Rented Out</li>
+                <li>Notice Period: 45 days</li>
+            </ul>
+        </div>
+
+        <div id="apartment-management" style="display: none;">
+            <h2>Apartments</h2>
+            <!-- Add, edit, or delete apartment details -->
+            <button onclick="addApartment()">Add Apartment</button>
+            <button onclick="editApartmentDetails()">Edit Apartment Details</button>
+            <button onclick="removeApartment()">Remove Apartment</button>
+
+            <!-- Display apartment details with editing capabilities for the admin -->
+            <div id="apartment-details" style="margin-top: 20px;">
+                <h3>Apartment Details</h3>
+                <form>
+                    <label for="advanceAmount">Advance Amount:</label>
+                    <input type="text" id="advanceAmount" name="advanceAmount"><br>
+
+                    <label for="rentalCost">Rental Cost:</label>
+                    <input type="text" id="rentalCost" name="rentalCost"><br>
+
+                    <label for="bedrooms">Bedrooms (2BHK/3BHK):</label>
+                    <input type="text" id="bedrooms" name="bedrooms"><br>
+
+                    <label for="floorSpace">Floor Space:</label>
+                    <input type="text" id="floorSpace" name="floorSpace"><br>
+
+                    <label for="status">Status (Rented Out/Vacant):</label>
+                    <input type="text" id="status" name="status"><br>
+
+                    <label for="noticePeriod">Notice Period:</label>
+                    <input type="text" id="noticePeriod" name="noticePeriod"><br>
+
+                    <button type="button" onclick="saveApartmentDetails()">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>
+    function showApartmentList() {
+        hideAll();
+        document.getElementById("apartment-list").style.display = "block";
+    }
+
+    function showRegisteredUsers() {
+        hideAll();
+        document.getElementById("registered-users").style.display = "block";
+    }
+
+    function showRequests() {
+        hideAll();
+        document.getElementById("requests").style.display = "block";
+    }
+
+    function showApartmentManagement() {
+        hideAll();
+        document.getElementById("apartment-management").style.display = "block";
+    }
+
+    function hideAll() {
+        document.getElementById("apartment-list").style.display = "none";
+        document.getElementById("registered-users").style.display = "none";
+        document.getElementById("requests").style.display = "none";
+        document.getElementById("apartment-management").style.display = "none";
+    }
+
+    // Simulated data for apartments
+    let apartments = [
+        { name: 'A-4-1', advanceAmount: 1000, rentalCost: 500, bedrooms: '2BHK', floorSpace: 800, status: 'Vacant', noticePeriod: 30 },
+        // ... add data for other apartments ...
+    ];
+
+    // Function to add a new apartment
+    function addApartment() {
+        let newApartment = {
+            name: prompt('Enter apartment name (e.g., A-4-1):'),
+            advanceAmount: parseInt(prompt('Enter advance amount:')),
+            rentalCost: parseInt(prompt('Enter rental cost:')),
+            bedrooms: prompt('Enter number of bedrooms (2BHK/3BHK):'),
+            floorSpace: parseInt(prompt('Enter floor space:')),
+            status: 'Vacant', // New apartments are initially vacant
+            noticePeriod: parseInt(prompt('Enter notice period:'))
+        };
+
+        apartments.push(newApartment);
+        alert('Apartment added successfully!');
+    }
+
+    function editApartmentDetails() {
+        let apartmentName = prompt('Enter apartment name to edit:');
+        let apartmentIndex = apartments.findIndex(apartment => apartment.name === apartmentName);
+
+        if (apartmentIndex !== -1) {
+            // Apartment found, allow editing
+            apartments[apartmentIndex].advanceAmount = parseInt(prompt('Enter new advance amount:'));
+            apartments[apartmentIndex].rentalCost = parseInt(prompt('Enter new rental cost:'));
+            apartments[apartmentIndex].bedrooms = prompt('Enter new number of bedrooms (2BHK/3BHK):');
+            apartments[apartmentIndex].floorSpace = parseInt(prompt('Enter new floor space:'));
+            apartments[apartmentIndex].noticePeriod = parseInt(prompt('Enter new notice period:'));
+
+            alert('Apartment details updated successfully!');
+        } else {
+            alert('Apartment not found!');
+        }
+    }
+
+    function removeApartment() {
+        let apartmentName = prompt('Enter apartment name to remove:');
+        let apartmentIndex = apartments.findIndex(apartment => apartment.name === apartmentName);
+
+        if (apartmentIndex !== -1) {
+            // Apartment found, remove it
+            apartments.splice(apartmentIndex, 1);
+            alert('Apartment removed successfully!');
+        } else {
+            alert('Apartment not found!');
+        }
+    }
+
+    function saveApartmentDetails() {
+        alert('Apartment details saved successfully!');
+    }
+    </script>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/counter.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+</body>
+</html>
