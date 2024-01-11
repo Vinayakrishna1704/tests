@@ -105,21 +105,20 @@
     </nav>
 
     <section class="container mt-4">
-        <form action="/register" method="post">
-            <label for="name">First Name:</label>
-            <input type="text" id="name" name="name" required>
+        <form action="/home/register" method="post">
+            <label for="name">First Name:*</label>
+            <input type="text" id="fname" name="fname" required pattern="{1,}">
 
-            <label for="name">Last Name:</label>
-            <input type="text" id="name" name="name" required>
+            <label for="name">Last Name:*</label>
+            <input type="text" id="lname" name="lname" required pattern="{1,}">
 
-            <label for="email">Email:</label>
+            <label for="email">Email:*</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="phone">Phone number:</label>
-            <input type="tel" id="phone" name="phone" >
+            <label for="phone">Phone number:*</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" >
 
-
-            <label for="password">Password:</label>
+            <label for="password">Password:*</label>
             <input type="password" id="password" name="password" required>
 
             <button type="submit" class="btn btn-dark mt-3">Register</button>
@@ -127,7 +126,7 @@
 
         <p>Already have an account? <a href="/login">@Html.ActionLink("Login Here","Login") </a></p>
     </section>
-
+    
     <footer class="bg-dark">
         <div class="container text-white">
             &copy; 2024 Apartment Rentals

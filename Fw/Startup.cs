@@ -21,7 +21,7 @@ namespace Fw
 			Debug.WriteLine("-->>>>>>>>");
 
 
-			OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
 			{
 				AllowInsecureHttp = true, // In production mode set AllowInsecureHttp = false
 				TokenEndpointPath = new PathString("/token"),
