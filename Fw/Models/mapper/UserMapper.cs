@@ -10,7 +10,8 @@ namespace Fw.Models.mapper
 		{
 			User user = new User();
 			user.Id = reader.GetInt32(reader.GetOrdinal("id"));
-			user.UserName = reader["user_name"] as string;
+			//user.UserName = reader["user_name"] as string;
+            user.Email = reader["email"] as string;
 			user.Password = reader["password"] as string;
 			user.Role = reader["role"] as string;
 			//user.Firstname = reader["firstname"] as string;

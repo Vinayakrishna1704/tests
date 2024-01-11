@@ -15,7 +15,7 @@ namespace Fw.DataAccessLayer
 		{
 			using (var connection = DbUtils.GetConnection())
 			{
-				SqlCommand command = new SqlCommand("select * from users where user_name='"+ username + "'", connection);
+				SqlCommand command = new SqlCommand("select * from users where email='"+ username + "'", connection);
 
 				User user=null;
 
