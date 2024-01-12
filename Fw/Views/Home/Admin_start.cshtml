@@ -202,7 +202,7 @@
         </div>
 
 
-        <div id="requests">
+        <div id="requests" style="display:none">
             <h2>All Requests</h2>
             <table>
                 <thead>
@@ -317,42 +317,53 @@
             <!-- Display apartment details with editing capabilities for the admin -->
             <div id="apartment-details" style="margin-top: 20px;">
                 <h3>Apartment Details</h3>
-                <form>
+                <form action="/home/admin_start" method="post">
                     <div class="form-group">
                         <label for="apartmentNumber">Apartment No:</label>
-                        <input type="text" id="apartmentnumber" name="apartmentNumber" placeholder="Enter Apartment Number">
+                        <input type="text" id="apartmentNumber" name="apartmentNumber" placeholder="Enter Apartment Number" required>
                     </div>
+
+                    <div class="form-group">
+                        <label for="block">Block(A-Z):</label>
+                        <input type="text" id="block" name="block" placeholder="Enter Block" pattern="^[A-Z]{1}$" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="floorNumber">Floor No:</label>
+                        <input type="text" id="floorNumber" name="floorNumber" placeholder="Enter Floor Number" required>
+                    </div>
+
                     <div class="form-group">
                         <label for="advanceAmount">Advance Amount:</label>
-                        <input type="text" id="advanceAmount" name="advanceAmount" placeholder="Enter advance amount">
+                        <input type="text" id="advanceAmount" name="advanceAmount" placeholder="Enter advance amount" required>
                     </div>
 
                     <div class="form-group">
                         <label for="rentalCost">Rental Cost:</label>
-                        <input type="text" id="rentalCost" name="rentalCost" placeholder="Enter rental cost">
+                        <input type="text" id="rentalCost" name="rentalCost" placeholder="Enter rental cost" required>
                     </div>
 
                     <div class="form-group">
                         <label for="bedrooms">Home type(1/2/3 BHK)</label>
-                        <input type="text" id="bedrooms" name="Home type" placeholder="Home type">
+                        <input type="text" id="bedrooms" name="bedrooms" placeholder="Home type" required>
                     </div>
 
                     <div class="form-group">
                         <label for="floorSpace">Floor Space:</label>
-                        <input type="text" id="floorSpace" name="floorSpace" placeholder="Enter floor space">
+                        <input type="text" id="floorSpace" name="floorSpace" placeholder="Enter floor space" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="status">Status (Rented Out/Vacant):</label>
-                        <input type="text" id="status" name="status" placeholder="Enter status">
+                        <label for="status">Status(Rented Out/Vacant):</label>
+                        <input type="text" id="status" name="status" placeholder="Enter status" pattern="^(Rented Out)|(Vacant)$" required>
                     </div>
 
                     <div class="form-group">
                         <label for="noticePeriod">Notice Period:</label>
-                        <input type="text" id="noticePeriod" name="noticePeriod" placeholder="Enter notice period">
+                        <input type="text" id="noticePeriod" name="noticePeriod" placeholder="Enter notice period" required>
                     </div>
 
-                    <button class="btn-success" type="button" onclick="saveApartmentDetails()">Save</button>
+                    <button class="btn-success" type="submit">Save</button>
                 </form>
 
             </div>
