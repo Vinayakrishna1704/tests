@@ -21,11 +21,11 @@
         }
 
         header {
-            background: url('images/back.png');
+            background-color: #333;
             background-size: cover;
             background-position: full;
             color: white;
-            padding: 70px;
+            padding: 50px;
             text-align: center;
             width: 100%;
         }
@@ -66,6 +66,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 17px;
         }
 
             button:hover {
@@ -109,7 +110,7 @@
 
             <button type="submit">Login</button>
         </form>
-
+        <br>
         <p>Don't have an account? <a href="/registration">@Html.ActionLink("Register here","Register")</a></p>
         <p><a href="/">@Html.ActionLink("Back to Home","Home")</a></p>
     </section>
