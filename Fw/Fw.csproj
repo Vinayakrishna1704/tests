@@ -222,6 +222,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Apartment.cs" />
+    <Compile Include="Models\mapper\ApartmentMapper.cs" />
     <Compile Include="Models\mapper\UserMapper.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

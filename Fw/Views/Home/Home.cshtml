@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+@using System.Data
+@model List<DataRow>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,12 +13,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <style>
+
+        .register-login {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            top: 5px;
+            right: 15px;
+        }
+
+            .register-login a {
+                color: white;
+                text-decoration: none;
+                padding: 8px 16px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+                .register-login a:hover {
+                    background-color: #444;
+                }
+
         h1 {
             font-family: 'Alegreya', sans-serif;
-            font-size: 6rem;
+            font-size: 3rem;
             color: white;
             text-align: center;
         }
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -24,14 +51,16 @@
         header {
             background-color: black;
             color: white;
-            padding: 25px;
+            padding: 10px 25px;
             text-align: center;
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-left:initial;
-            margin-right:initial;
-           
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 100;
         }
 
         nav {
@@ -84,13 +113,17 @@
 </head>
 <body>
     <header>
-       
-        <h1 >Team D Rentals</h1>
-            <img src="~/images/photos/logo.jpg" alt="Logo" style="max-width: 100px;">
-        </header>
-        <div class="filter-section">
+        <h1>Team D Rentals</h1>
+        <img src="~/images/photos/logo.jpg" alt="Logo" style="max-width: 100px; margin-top: 1px;">
+        <div class="register-login">
+            <a href="#">@Html.ActionLink("Register", "Register")</a>
+            <a href="#">@Html.ActionLink("Login", "Login")</a>
+        </div>
+    </header>
+    <div class="filter-section">
+        <form asp-controller="Home" asp-action="Home" method="post">
             <label for="bhk">BHK Type:</label>
-            <select id="bhk">
+            <select name="bhk" id="bhk">
                 <!-- Options for BHK type -->
                 <option value="1">1 BHK</option>
                 <option value="2">2 BHK</option>
@@ -103,43 +136,48 @@
                 <option value="no">No</option>
             </select>
             <label for="rent">Rent Cost:</label>
-            <input type="number" id="rent" placeholder="Enter rent cost">
+            <select name="cost" id="cost">
+                <option value="10">5000-8000</option>
+                <option value="11">8000-10000</option>
+                <options value="less">less than 5000</options>
+                <option value="great">Greater than 10000</option>
+            </select>
             <label for="floor-space">Floor Space:</label>
-            <input type="number" id="floor-space" placeholder="Enter floor space">
+            <select name="floorspace" id="floorspace">
+                <option value="10">200-300</option>
+                <option value="11">300-400</option>
+                <option value="less">less than 200</option>
+                <options value="great">greater than 400</options>
+            </select>
+
             <button>Apply Filters</button>
-        </div>
-        <div class="apartment">
-            <!-- Sample apartment cards, replace with dynamic data -->
-            <div class="apartment-card">
-                <img src="~/images/photos/1.jpg" alt="Apartment 1">
-                <h2>Apartment 1</h2>
-                <p>BHK: 2 | Vacancy: Yes | Rent: $1000 | Floor Space: 1200 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/2.jpg" alt="Apartment 2">
-                <h2>Apartment 2</h2>
-                <p>BHK: 3 | Vacancy: No | Rent: $1500 | Floor Space: 1600 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/3.jpg" alt="Apartment 2">
-                <h2>Apartment 3</h2>
-                <p>BHK: 2 | Vacancy: Yes | Rent: $2000 | Floor Space: 1300 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/4.jpg" alt="Apartment 2">
-                <h2>Apartment 4</h2>
-                <p>BHK: 1 | Vacancy: No | Rent: $3000| Floor Space: 1100 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/5.jpg" alt="Apartment 2">
-                <h2>Apartment 5</h2>
-                <p>BHK: 1 | Vacancy: Yes | Rent: $4500| Floor Space: 1400 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/6.jpg" alt="Apartment 2">
-                <h2>Apartment 6</h2>
-                <p>BHK: 3 | Vacancy: No | Rent: $5700 | Floor Space: 1500 sq ft</p>
-            </div>
+    </div>
+    <div class="apartment">
+        <!-- Sample apartment cards, replace with dynamic data -->
+        <div class="apartment-card">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                DataRow row = Model[i];
+                if (@row["bhk"].ToString() == "2")
+                {
+
+                    <img src="~/images/photos/1.jpg" alt="Apartment 1">
+                    <h2>A - @row["floor_num"].ToString() - @row["apartment_no"]</h2>
+                    <p>BHK:@row["bhk"].ToString()| Vacancy: Available | Rent: @row["rent_cost"].ToString()| Floor Space: @row["floor_space"].ToString() sq ft</p>
+                }
+                else
+                {
+                    <img src="~/images/photos/2.jpg">
+                    <h2>A - @row["floor_num"].ToString() - @row["apartment_no"]</h2>
+                    <p>
+                        BHK:@row["bhk"].ToString()| Vacancy: Available | Rent: @row["rent_cost"].ToString()|  Floor Space: @row["floor_space"].ToString() sq ft
+                    </p>
+                }
+
+            }
+
+
+            
             <!-- Add more apartment cards as needed -->
         </div>
 </body>

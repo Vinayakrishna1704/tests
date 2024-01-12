@@ -11,11 +11,126 @@ namespace Fw.Controllers
 {
     public class HomeController : Controller
 	{
+        
+        [HttpGet]
         public ActionResult Home()
         {
-            
-           return View();
+            DataTable tab = new DataTable();
+            using (var connection=DbUtils.GetConnection())
+            {
+                connection.Open();
+                string query = "SELECT * FROM Apartment WHERE isrented=0"; 
+                SqlCommand command = new SqlCommand(query, connection);
+
+                SqlDataAdapter da = new SqlDataAdapter(command);
+                da.Fill(tab);
+
+            }
+            List<DataRow> rows = tab.AsEnumerable().ToList<DataRow>();
+            return View(rows);
         }
+        [HttpPost]
+        public ActionResult Home(int? bhk ,int? cost,int? floorspace)
+        {
+            DataTable tab = new DataTable();
+            if (bhk.HasValue)
+            {
+                using(var connection = DbUtils.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM Apartment WHERE bhk=" + bhk.ToString();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    da.Fill(tab);
+                }
+                List<DataRow> rows = tab.AsEnumerable().ToList<DataRow>();
+                return View(rows);
+            }
+            if (cost.HasValue)
+            {
+                using (var connection = DbUtils.GetConnection())
+                {
+                    //string query;
+                    connection.Open();
+                    if (cost.ToString() == "less")
+                    {
+                        string query2 = "SELECT * FROM Apartment WHERE cost<5000";
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+
+
+                    }
+
+                    else if (cost.ToString()=="great")
+                    {
+                        string query2 = "SELECT * FROM Apartment WHERE cost>5000";
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                    else if(cost.ToString()=="10")
+                    {
+                        string query2 = "SELECT * FROM Apartment WHERE cost BETWEEN 5000 AND 8000";
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                    else
+                    {
+                        string query2 = "SELECT * FROM Apartment WHERE cost BETWEEN 8000 AND 10000";
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                }
+                List<DataRow> rows = tab.AsEnumerable().ToList<DataRow>();
+                return View(rows);
+
+            }
+            if (floorspace.HasValue)
+            {
+                using (var connection = DbUtils.GetConnection())
+                {
+                    connection.Open();
+                    if (floorspace.ToString() == "less")
+                    {
+                        string query3 = "SELECT * FROM Apartment WHERE floorspace<200";
+                        SqlCommand command = new SqlCommand(query3, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                    else if(floorspace.ToString()=="great")
+                    {
+                        string query = "SELECT * FROM Apartment WHERE floor_space>400" + floorspace.ToString();
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                    else if(floorspace.ToString()=="10")
+                    {
+                        string query = "SELECT * FROM Apartment WHERE floor_space BETWEEN 200 AND 300";
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                    else
+                    {
+                        string query = "SELECT * FROM Apartment WHERE cost BETWEEN 300  AND 400";
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                }
+                List<DataRow> rows = tab.AsEnumerable().ToList<DataRow>();
+                return View(rows);
+
+            }
+            return View();
+        }
+        
+        [HttpGet]
 		public ActionResult Index()
 		{
 			ViewBag.Title = "Index Page";
@@ -75,7 +190,7 @@ namespace Fw.Controllers
             {
                 connection.Open();
 
-                string query = "select * from dbo.users where role='user'";
+                string query = "select * from dbo.users where role='USER'";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 SqlDataAdapter da = new SqlDataAdapter(command);

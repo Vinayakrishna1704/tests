@@ -1,18 +1,366 @@
 ﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+
+        .status-accepted {
+            font-weight: bold;
+            color: green;
+        }
+
+        .status-pending {
+            font-weight: bold;
+            color: orange;
+        }
+
+        .status-denied {
+            font-weight: bold;
+            color:  red;
+
+        }
+
+        .notification-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            margin-right: 20px;
+        }
+
+        .notification-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        .close-icon {
+            cursor: pointer;
+            font-size: 18px;
+            color: #555;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        h1 {
+            font-family: 'Alegreya', sans-serif;
+            font-size: 3rem;
+            color: white;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding-bottom: 15px;
+            text-align: center;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 100px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #666;
+            padding: 10px;
+        }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+                padding: 8px 16px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+                nav a:hover {
+                    background-color: #444;
+                }
+
+        .filter-section {
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        .apartment {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .apartment-card {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .apartment-card img {
+                width: 100%;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+        .request-button,
+        .view-details-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .request-button:hover,
+            .view-details-button:hover {
+                background-color: #45a049;
+            }
+
+        .details-container {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+            .details-container p {
+                margin: 5px 0;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .submit-button:hover {
+                background-color: #45a049;
+            }
+    </style>
 </head>
 <body>
-    <div>
-        <p1>User<</p1>>
-    
+    <header>
+        <h1>Team D Rentals..hello user</h1>
+
+
+        <span class="notification-icon" onclick="toggleNotificationSection()">🔔</span>
+    </header>
+    <div class="notification-section" id="notificationSection">
+        <span class="close-icon" onclick="toggleNotificationSection()">✖</span>
+        <h2>Notification Status</h2>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Apartment_Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A-4-1</td>
+                        <td class="status-accepted">Accepted</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="filter-section">
+        <label for="bhk">BHK Type:</label>
+        <select id="bhk">
+            <option value="1">1 BHK</option>
+            <option value="2">2 BHK</option>
+            <option value="3">3 BHK</option>
+        </select>
+        <label for="vacancy">Vacancy:</label>
+        <select id="vacancy">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+        <label for="rent">Rent Cost:</label>
+        <input type="number" id="rent" placeholder="Enter rent cost">
+        <label for="floor-space">Floor Space:</label>
+        <input type="number" id="floor-space" placeholder="Enter floor space">
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+    <div class="apartment">
+        <div class="apartment-card">
+            <img src="~/images/photos/1.jpg" alt="Apartment 1">
+            <div class="details-container" id="details-A-4-1">
+                <p>Advance Amount: $2000</p>
+                <p>Rental Cost: $1000</p>
+                <p>BHK: 2</p>
+                <p>Floor Space: 1200 sq ft</p>
+                <p>Status: Vacant</p>
+                <p>Notice Period: 30 days</p>
+            </div>
+            <h2>A-4-1</h2>
+            <p>BHK: 2 | Vacancy: Yes | Rent: $1000 | Floor Space: 1200 sq ft</p>
+            <button class="view-details-button" onclick="toggleDetails('details-A-4-1')">View Details</button>
+            <button class="request-button" onclick="openModal('A-4-1')">Request</button>
+        </div>
+        <!-- Add more apartment cards as needed -->
+    </div>
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <label for="request-name">Name:</label>
+            <input type="text" id="request-name" name="request-name" required>
+            <label for="request-email">Email:</label>
+            <input type="email" id="request-email" name="request-email" required>
+            <label for="request-phone">Phone Number:</label>
+            <input type="tel" id="request-phone" name="request-phone" pattern="[0-9]{10}" required>
+            <label for="request-apartment">Apartment Number:</label>
+            <input type="text" id="request-apartment" name="request-apartment" readonly>
+            <button class="submit-button" onclick="submitRequest()">Submit Request</button>
+        </div>
+    </div>
+    <script>function toggleNotificationSection() {
+            var notificationSection = document.getElementById('notificationSection');
+            if (notificationSection.style.display === 'block') {
+                notificationSection.style.display = 'none';
+            } else {
+                notificationSection.style.display = 'block';
+            }
+        }
+        function toggleDetails(detailsId) {
+            var detailsContainer = document.getElementById(detailsId);
+            if (detailsContainer.style.display === "block") {
+                detailsContainer.style.display = "none";
+            } else {
+                detailsContainer.style.display = "block";
+            }
+        }
+
+        function openModal(apartmentNumber) {
+            var modal = document.getElementById('requestModal');
+            var apartmentInput = document.getElementById('request-apartment');
+            apartmentInput.value = apartmentNumber;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('requestModal');
+            modal.style.display = 'none';
+        }
+
+        function submitRequest() {
+            // Perform actions to submit the request
+            // You can retrieve values from the form inputs here
+            // For example: var name = document.getElementById('request-name').value;
+            // Implement your logic to handle the request submission
+            closeModal(); // Close the modal after submission
+        }
+
+        function applyFilters() {
+            // Implement logic to apply filters and update the displayed apartments
+            // You can retrieve filter values like document.getElementById('bhk').value
+            // Update the UI accordingly
+        }</script>
 </body>
 </html>
