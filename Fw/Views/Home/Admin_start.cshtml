@@ -1,9 +1,48 @@
-﻿<!DOCTYPE html>
+﻿@using System.Data
+@model List<DataRow>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     
     <style>
+        #apartment-details {
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5; /* Light gray background */
+            border-radius: 5px;
+        }
+
+            #apartment-details h3 {
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+
+            #apartment-details form .form-group {
+                margin-bottom: 10px;
+            }
+
+            #apartment-details form label {
+                display: block;
+                font-weight: bold;
+            }
+
+            #apartment-details form input[type="text"] {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #apartment-details form button.btn-success {
+                background-color: #4CAF50; /* Green */
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
@@ -146,52 +185,127 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>User 1</td>
-                        <td>user1@example.com</td>
-                        <td>(555) 123-4567</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>User 2</td>
-                        <td>user2@example.com</td>
-                        <td>(555) 234-5678</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>User 3</td>
-                        <td>user3@example.com</td>
-                        <td>(555) 345-6789</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>User 4</td>
-                        <td>user4@example.com</td>
-                        <td>(555) 456-7890</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>User 5</td>
-                        <td>user5@example.com</td>
-                        <td>(555) 567-8901</td>
-                    </tr>
+                    @if (Model != null)
+                    {
+                        foreach (DataRow row in @Model)
+                        {
+                            <tr>
+                                <td>@row["id"].ToString()</td>
+                                <td>@row["first_name"].ToString()</td>
+                                <td>@row["email"].ToString()</td>
+                                <td>@row["phone_no"].ToString()</td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
         </div>
 
 
-        <div id="requests" style="display: none;">
+        <div id="requests">
             <h2>All Requests</h2>
-            <!-- Display rental requests with the ability to accept or deny -->
-            <ul>
-                <li>Rental Request 1</li>
-                <li>Rental Request 2</li>
-                <li>Rental Request 3</li>
-                <li>Rental Request 4</li>
-                <li>Rental Request 5</li>
-            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Apartment Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>A-4-1</td>
+                        <td>
+                            <button class="accept-button" onclick="acceptRequest(1)">Accept</button>
+                            <button class="deny-button" onclick="denyRequest(1)">Deny</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>A-4-1</td>
+                        <td>
+                            <button class="accept-button" onclick="acceptRequest(1)">Accept</button>
+                            <button class="deny-button" onclick="denyRequest(1)">Deny</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>A-4-1</td>
+                        <td>
+                            <button class="accept-button" onclick="acceptRequest(1)">Accept</button>
+                            <button class="deny-button" onclick="denyRequest(1)">Deny</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>(123) 456-7890</td>
+                        <td>A-4-1</td>
+                        <td>
+                            <button class="accept-button" onclick="acceptRequest(1)">Accept</button>
+                            <button class="deny-button" onclick="denyRequest(1)">Deny</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <style>
+            #requests table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+
+            #requests th,
+            #requests td {
+                padding: 10px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+
+            #requests th {
+                background-color: #f2f2f2;
+            }
+
+            #requests td:first-child {
+                font-weight: bold;
+            }
+
+            #requests .accept-button {
+                background-color: #4CAF50; /* Green */
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 100px;
+            }
+
+            #requests .deny-button {
+                background-color: #F44336; /* Red */
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 100px;
+            }
+            #requests .action-buttons {
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+
 
         <div id="apartment-management" style="display: none;">
             <h2>Apartments</h2>
@@ -205,6 +319,10 @@
                 <h3>Apartment Details</h3>
                 <form>
                     <div class="form-group">
+                        <label for="apartmentNumber">Apartment No:</label>
+                        <input type="text" id="apartmentnumber" name="apartmentNumber" placeholder="Enter Apartment Number">
+                    </div>
+                    <div class="form-group">
                         <label for="advanceAmount">Advance Amount:</label>
                         <input type="text" id="advanceAmount" name="advanceAmount" placeholder="Enter advance amount">
                     </div>
@@ -215,8 +333,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="bedrooms">Bedrooms (2BHK/3BHK):</label>
-                        <input type="text" id="bedrooms" name="bedrooms" placeholder="Enter number of bedrooms">
+                        <label for="bedrooms">Home type(1/2/3 BHK)</label>
+                        <input type="text" id="bedrooms" name="Home type" placeholder="Home type">
                     </div>
 
                     <div class="form-group">

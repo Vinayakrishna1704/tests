@@ -10,19 +10,24 @@ using System.Web.Http;
 
 namespace Fw.Controllers
 {
-	public class ValuesController : ApiController
-	{
-		// GET api/values
-		[Authorize]
-		public IHttpActionResult Get()
+    public class ValuesController : ApiController
+    {
+        // GET api/values
+        [Authorize]
+        [HttpGet]
+        [Route("api/users")]
+        public IHttpActionResult Get()
 		{
-			AuthDAO authDAO = new AuthDAO();
+			//AuthDAO authDAO = new AuthDAO();
 			
 			var username = User.GetUsername();
 			var role = User.GetRole();
-			                    
-			return Ok(authDAO.GetUserByUsername("admin"));
-		}
+
+            var data = new { username, role };
+
+            // Return a JSON response with the data
+            return Json(data);
+        }
 
 		// GET api/values/5
 		public string Get(int id)
