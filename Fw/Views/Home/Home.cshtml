@@ -6,17 +6,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-=======
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,600&display=swap" rel="stylesheet">
->>>>>>> 3afba6eb01c93da0d997c8edc437a94e7390cd12
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <style>
-<<<<<<< HEAD
+
+        .bottom-images{
+            display:flex;
+            justify-content:space-around;
+            margin-top:20px;
+        }
+        .bottom-images img{
+            width:100px;
+            height:100px;
+            border-radius:5px;
+            margin-bottom:10px;
+        }
 
         .register-login {
             display: flex;
@@ -38,21 +46,13 @@
                     background-color: #444;
                 }
 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 9161ea8a8237482f5fa7723871186b2c00768d3b
         h1 {
             font-family: 'Alegreya', sans-serif;
             font-size: 3rem;
             color: white;
             text-align: center;
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> 3afba6eb01c93da0d997c8edc437a94e7390cd12
->>>>>>> 9161ea8a8237482f5fa7723871186b2c00768d3b
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -61,13 +61,6 @@
         }
 
         header {
-<<<<<<< HEAD
-            background-color: #333;
-            color: white;
-            padding: 50px;
-            text-align: center;
-            
-=======
             background-color: black;
             color: white;
             padding: 10px 25px;
@@ -75,18 +68,11 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-<<<<<<< HEAD
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             height: 100;
-=======
-            margin-left:initial;
-            margin-right:initial;
-           
->>>>>>> 3afba6eb01c93da0d997c8edc437a94e7390cd12
->>>>>>> 9161ea8a8237482f5fa7723871186b2c00768d3b
         }
 
         nav {
@@ -135,11 +121,28 @@
                 border-radius: 5px;
                 margin-bottom: 10px;
             }
+        .apartment {
+            border: 1px solid #ccc;
+            border-collapse: collapse; 
+            width: 100%; 
+        }
+        .apartment th,
+        .apartment td {
+            padding: 10px;
+            text-align: left; 
+        }
+        .apartment th {
+            background-color: #f2f2f2; /* Light gray header background */
+        }
+
+        .apartment tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
     </style>
 </head>
 <body>
     <header>
-<<<<<<< HEAD
         <h1>Team D Rentals</h1>
         <img src="~/images/photos/logo.jpg" alt="Logo" style="max-width: 100px; margin-top: 1px;">
         <div class="register-login">
@@ -149,179 +152,93 @@
     </header>
     <div class="filter-section">
         <form asp-controller="Home" asp-action="Home" method="post">
-=======
-<<<<<<< HEAD
-        <h1>Team D Rentals</h1>
-        <img src="~/images/logo.jpg" alt="Logo" style="max-width: 100px;">
-    </header>
-
-    <div class="filter-section">
-        <label for="bhk">BHK Type:</label>
-        <select id="bhk">
-            <!-- Options for BHK type -->
-            <option value="1">1 BHK</option>
-            <option value="2">2 BHK</option>
-            <option value="3">3 BHK</option>
-        </select>
-
-        <label for="vacancy">Vacancy:</label>
-        <select id="vacancy">
-            <!-- Options for vacancy -->
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-
-        <label for="rent">Rent Cost:</label>
-        <input type="number" id="rent" placeholder="Enter rent cost">
-
-        <label for="floor-space">Floor Space:</label>
-        <input type="number" id="floor-space" placeholder="Enter floor space">
-
-        <button>Apply Filters</button>
-    </div>
-
-    <div class="apartment">
-        <!-- Sample apartment cards, replace with dynamic data -->
-        <div class="apartment-card">
-            <img src="~/images/1.jpg" alt="Apartment 1">
-            <h2>Apartment 1</h2>
-            <p>BHK: 2 | Vacancy: Yes | Rent: $1000 | Floor Space: 1200 sq ft</p>
-        </div>
-
-        <div class="apartment-card">
-            <img src="~/images/2.jpg" alt="Apartment 2">
-            <h2>Apartment 2</h2>
-            <p>BHK: 3 | Vacancy: No | Rent: $1500 | Floor Space: 1600 sq ft</p>
-        </div>
-
-        <div class="apartment-card">
-            <img src="~/images/3.jpg" alt="Apartment 2">
-            <h2>Apartment 3</h2>
-            <p>BHK: 2 | Vacancy: Yes | Rent: $2000 | Floor Space: 1300 sq ft</p>
-        </div>
-
-        <div class="apartment-card">
-            <img src="~/images/4.jpg" alt="Apartment 2">
-            <h2>Apartment 4</h2>
-            <p>BHK: 1 | Vacancy: No | Rent: $3000| Floor Space: 1100 sq ft</p>
-        </div>
-
-        <div class="apartment-card">
-            <img src="~/images/5.jpg" alt="Apartment 2">
-            <h2>Apartment 5</h2>
-            <p>BHK: 1 | Vacancy: Yes | Rent: $4500| Floor Space: 1400 sq ft</p>
-        </div>
-
-        <div class="apartment-card">
-            <img src="~/images/6.jpg" alt="Apartment 2">
-            <h2>Apartment 6</h2>
-            <p>BHK: 3 | Vacancy: No | Rent: $5700 | Floor Space: 1500 sq ft</p>
-        </div>
-
-        <!-- Add more apartment cards as needed -->
-    </div>
-=======
-       
-        <h1 >Team D Rentals</h1>
-            <img src="~/images/photos/logo.jpg" alt="Logo" style="max-width: 100px;">
-        </header>
-        <div class="filter-section">
->>>>>>> 9161ea8a8237482f5fa7723871186b2c00768d3b
             <label for="bhk">BHK Type:</label>
             <select name="bhk" id="bhk">
                 <!-- Options for BHK type -->
-                <option value="1">1 BHK</option>
+               <!---- <option value="1">1 BHK</option> -->
+                <option value="">Select Range</option>
                 <option value="2">2 BHK</option>
                 <option value="3">3 BHK</option>
             </select>
             <label for="vacancy">Vacancy:</label>
-            <select id="vacancy">
+            <select id="vacancy" name="vacancy">
                 <!-- Options for vacancy -->
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="">Select Vacancy</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
             </select>
             <label for="rent">Rent Cost:</label>
             <select name="cost" id="cost">
+                <option value="">Select Cost</option>
                 <option value="10">5000-8000</option>
                 <option value="11">8000-10000</option>
-                <options value="less">less than 5000</options>
-                <option value="great">Greater than 10000</option>
+                <option value="1">less than 5000</option>
+                <option value="2">Greater than 10000</option>
             </select>
             <label for="floor-space">Floor Space:</label>
             <select name="floorspace" id="floorspace">
+                <option value="">Select Floor Space</option>
                 <option value="10">200-300</option>
                 <option value="11">300-400</option>
-                <option value="less">less than 200</option>
-                <options value="great">greater than 400</options>
+                <option value="1">less than 200</option>
+                <option value="2">greater than 400</option>
             </select>
 
             <button>Apply Filters</button>
-<<<<<<< HEAD
     </div>
     <div class="apartment">
-        <!-- Sample apartment cards, replace with dynamic data -->
-        <div class="apartment-card">
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                DataRow row = Model[i];
-                if (@row["bhk"].ToString() == "2")
+        
+        <table>
+            <thead>
+                <tr>
+                <th>S.NO</th>
+                <th>APARTMENT.NO</th>
+                <th>BHK</th>
+                <th>RENTAL COST</th>
+                <th>FLOOR SPACE</th>
+                <th>VACENCY</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
                 {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        DataRow row = Model[i];
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>A-@row["floor_num"].ToString()-@row["apartment_no"].ToString()</td>
+                            <td>@row["bhk"].ToString()</td>
+                            <td>@row["rent_cost"].ToString()</td>
+                            <td>@row["floor_space"].ToString() sq</td>
+                            <td>
+                            @if ((int)@row["is_rented"] == 0)
+                            {
+                            <span>RENTED</span>
+                            }
+                            else{
+                            <span>VACENT</span>
+                            }
+                            </td>
 
-                    <img src="~/images/photos/1.jpg" alt="Apartment 1">
-                    <h2>A - @row["floor_num"].ToString() - @row["apartment_no"]</h2>
-                    <p>BHK:@row["bhk"].ToString()| Vacancy: Available | Rent: @row["rent_cost"].ToString()| Floor Space: @row["floor_space"].ToString() sq ft</p>
+                        </tr>
+                    }
                 }
-                else
-                {
-                    <img src="~/images/photos/2.jpg">
-                    <h2>A - @row["floor_num"].ToString() - @row["apartment_no"]</h2>
-                    <p>
-                        BHK:@row["bhk"].ToString()| Vacancy: Available | Rent: @row["rent_cost"].ToString()|  Floor Space: @row["floor_space"].ToString() sq ft
-                    </p>
-                }
 
-            }
+            </tbody>
+            </table>
 
 
-            
-=======
+           
         </div>
-        <div class="apartment">
-            <!-- Sample apartment cards, replace with dynamic data -->
-            <div class="apartment-card">
-                <img src="~/images/photos/1.jpg" alt="Apartment 1">
-                <h2>A-4-1 </h2>
-                <p>BHK: 2 | Vacancy: Yes | Rent: $1000 | Floor Space: 1200 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/2.jpg" alt="Apartment 2">
-                <h2>B-3-5 </h2>
-                <p>BHK: 3 | Vacancy: No | Rent: $1500 | Floor Space: 1600 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/3.jpg" alt="Apartment 2">
-                <h2>A-3-2</h2>
-                <p>BHK: 2 | Vacancy: Yes | Rent: $2000 | Floor Space: 1300 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/4.jpg" alt="Apartment 2">
-                <h2>A-2-4 </h2>
-                <p>BHK: 1 | Vacancy: No | Rent: $3000| Floor Space: 1100 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/5.jpg" alt="Apartment 2">
-                <h2>A-6-6 </h2>
-                <p>BHK: 1 | Vacancy: Yes | Rent: $4500| Floor Space: 1400 sq ft</p>
-            </div>
-            <div class="apartment-card">
-                <img src="~/images/photos/6.jpg" alt="Apartment 2">
-                <h2>A-4-1 </h2>
-                <p>BHK: 3 | Vacancy: No | Rent: $5700 | Floor Space: 1500 sq ft</p>
-            </div>
->>>>>>> 9161ea8a8237482f5fa7723871186b2c00768d3b
-            <!-- Add more apartment cards as needed -->
+    <div class="bottom-images">
+        <img src="~/images/photos/2.jpg" alt="2bhk img" />
+        <h2>2BHK APARTMENT</h2>
         </div>
->>>>>>> 3afba6eb01c93da0d997c8edc437a94e7390cd12
+    <div class="bottom-images">
+        <img src="~/images/photos/3.jpg" alt="3bhk img" />
+        <h2>3BHK APARTMENT</h2>
+        </div>
+
 </body>
-
 </html>

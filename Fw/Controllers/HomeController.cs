@@ -9,24 +9,21 @@ using System.Web.Razor.Parser.SyntaxTree;
 using Fw.utils;
 using Fw.Utils;
 
+
+
 namespace Fw.Controllers
 {
     public class HomeController : Controller
 	{
-<<<<<<< HEAD
         
         [HttpGet]
-=======
-
-
->>>>>>> 9161ea8a8237482f5fa7723871186b2c00768d3b
         public ActionResult Home()
         {
             DataTable tab = new DataTable();
             using (var connection=DbUtils.GetConnection())
             {
                 connection.Open();
-                string query = "SELECT * FROM Apartment WHERE isrented=0"; 
+                string query = "SELECT * FROM apartments"; 
                 SqlCommand command = new SqlCommand(query, connection);
 
                 SqlDataAdapter da = new SqlDataAdapter(command);
@@ -37,19 +34,52 @@ namespace Fw.Controllers
             return View(rows);
         }
         [HttpPost]
-        public ActionResult Home(int? bhk ,int? cost,int? floorspace)
+        public ActionResult Home(int? bhk ,int? cost,int? floorspace,int? vacancy)
         {
             DataTable tab = new DataTable();
-            if (bhk.HasValue)
+            if (vacancy.HasValue)
             {
                 using(var connection = DbUtils.GetConnection())
                 {
-                    connection.Open();
+                    
+                    
+                     if (vacancy.Value==1)
+                    {
+                        string query = "SELECT * FROM apartments WHERE is_rented=1";
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
 
-                    string query = "SELECT * FROM Apartment WHERE bhk=" + bhk.ToString();
-                    SqlCommand command = new SqlCommand(query, connection);
-                    SqlDataAdapter da = new SqlDataAdapter(command);
-                    da.Fill(tab);
+                    }
+                    else
+                    {
+                        string query = "SELECT * FROM apartments WHERE is_rented=0";
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                }
+            }
+            if (bhk.HasValue)
+            {
+                
+                using(var connection = DbUtils.GetConnection())
+                {
+                    connection.Open();
+                    if (bhk.ToString() == "")
+                    {
+                        string query = "SELECT * FROM apartments";
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+
+                    }
+                    else {
+                        string query = "SELECT * FROM apartments WHERE bhk=" + bhk.ToString();
+                        SqlCommand command = new SqlCommand(query, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
                 }
                 List<DataRow> rows = tab.AsEnumerable().ToList<DataRow>();
                 return View(rows);
@@ -60,9 +90,16 @@ namespace Fw.Controllers
                 {
                     //string query;
                     connection.Open();
-                    if (cost.ToString() == "less")
+                    if (cost.ToString() == "")
                     {
-                        string query2 = "SELECT * FROM Apartment WHERE cost<5000";
+                        string query2 = "SELECT * FROM apartments";
+                        SqlCommand command = new SqlCommand(query2, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+                    }
+                    else if (cost.ToString() == "1")
+                    {
+                        string query2 = "SELECT * FROM apartments WHERE rent_cost BETWEEN 0 AND 5001";
                         SqlCommand command = new SqlCommand(query2, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
@@ -70,23 +107,25 @@ namespace Fw.Controllers
 
                     }
 
-                    else if (cost.ToString()=="great")
+                    else if (cost.ToString()=="11")
                     {
-                        string query2 = "SELECT * FROM Apartment WHERE cost>5000";
+                         string query2 = "SELECT * FROM apartments WHERE rent_cost BETWEEN 8002 AND 10001";
                         SqlCommand command = new SqlCommand(query2, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
                     }
                     else if(cost.ToString()=="10")
                     {
-                        string query2 = "SELECT * FROM Apartment WHERE cost BETWEEN 5000 AND 8000";
+                        string query2 = "SELECT * FROM apartments WHERE rent_cost BETWEEN 5002 AND 8001";
                         SqlCommand command = new SqlCommand(query2, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
                     }
-                    else
+                    else if(cost.ToString()=="2")
                     {
-                        string query2 = "SELECT * FROM Apartment WHERE cost BETWEEN 8000 AND 10000";
+                        
+
+                        string query2 = "SELECT * FROM apartments WHERE rent_cost NOT BETWEEN 0 AND 10001";
                         SqlCommand command = new SqlCommand(query2, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
@@ -101,30 +140,40 @@ namespace Fw.Controllers
                 using (var connection = DbUtils.GetConnection())
                 {
                     connection.Open();
-                    if (floorspace.ToString() == "less")
+                    if (floorspace.ToString() == "")
                     {
-                        string query3 = "SELECT * FROM Apartment WHERE floorspace<200";
+                        string query3 = "SELECT * FROM apartments";
+                        SqlCommand command = new SqlCommand(query3, connection);
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(tab);
+
+                    }
+                    else if (floorspace.ToString() == "1")
+                    {
+                        string query3 = "SELECT * FROM apartments WHERE floor_space BETWEEN 0 AND 200";
                         SqlCommand command = new SqlCommand(query3, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
                     }
-                    else if(floorspace.ToString()=="great")
+                    else if(floorspace.ToString()=="11")
                     {
-                        string query = "SELECT * FROM Apartment WHERE floor_space>400" + floorspace.ToString();
+                        string query = "SELECT * FROM apartments WHERE floor_space BETWEEN 300  AND 400";
                         SqlCommand command = new SqlCommand(query, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
                     }
                     else if(floorspace.ToString()=="10")
                     {
-                        string query = "SELECT * FROM Apartment WHERE floor_space BETWEEN 200 AND 300";
+                        string query = "SELECT * FROM apartments WHERE floor_space BETWEEN 201 AND 299";
                         SqlCommand command = new SqlCommand(query, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
                     }
-                    else
+                    else if(floorspace.ToString()=="2")
                     {
-                        string query = "SELECT * FROM Apartment WHERE cost BETWEEN 300  AND 400";
+                        
+
+                        string query = "SELECT * FROM apartments WHERE floor_space NOT BETWEEN 0 AND 400";
                         SqlCommand command = new SqlCommand(query, connection);
                         SqlDataAdapter da = new SqlDataAdapter(command);
                         da.Fill(tab);
@@ -173,19 +222,43 @@ namespace Fw.Controllers
         [HttpPost]
         public ActionResult Register(string fname, string lname, string email, string phone, string password)
         {
-            using (var connection = DbUtils.GetConnection())
+
+            if (ServicesUtils.IsPasswordCheck(password) != true)
             {
-                connection.Open();
-
-                string query = $"insert into dbo.users (status, modified_by, modified_at, first_name, last_name, email, phone_no, password) " +
-                    $"values (1, 1, @value, '{fname}', '{lname}', '{email}', {phone}, '{password}');";
-
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@value", DateTime.Now);
-                command.ExecuteNonQuery();
+                ViewBag.ErrorMessage = "Password Requirement Not Met";
+                return View();
+            }
+            else if (ServicesUtils.IsEmailCheck(email) != true)
+            {
+                ViewBag.ErrorMessage = "Email Pattern Not Right";
+                return View();
             }
 
-            return View("Login");
+            else
+            {
+                try
+                {
+                    using (var connection = DbUtils.GetConnection())
+                    {
+                        connection.Open();
+
+                        string query = $"insert into dbo.users (status, modified_by, modified_at, first_name, last_name, email, phone_no, password) " +
+                            $"values (1, 1, @value, '{fname}', '{lname}', '{email}', {phone}, '{password}');";
+
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@value", DateTime.Now);
+                        command.ExecuteNonQuery();
+                    }
+
+                    return View("Login");
+                }
+
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Email already used";
+                    return View();
+                }
+            }
         }
 
         [HttpGet]
@@ -217,8 +290,8 @@ namespace Fw.Controllers
             {
                 connection.Open();
 
-                string query = $"insert into dbo.Apartments(status, modified_by, modified_at, block, apartment_no, floor_num, bhk, advance_amt, rent_cost, floor_space, notice_period, is_rented)" +
-                    $"values(1, 1, @value, '{block}', {apartmentNumber}, {floorNumber}, {bedrooms}, {advanceAmount},{rentalCost},{floorSpace},{noticePeriod}, 0);";
+                string query = $"insert into dbo.apartments(status, modified_by, modified_at, block, apartment_no, floor_num, bhk, advance_amt, rent_cost, floor_space, notice_period, isrented,user_id)" +
+                    $"values(1, 1, @value, '{block}', {apartmentNumber}, {floorNumber}, {bedrooms}, {advanceAmount},{rentalCost},{floorSpace},{noticePeriod}, 0,1);";
 
                 Debug.WriteLine(query);
 
@@ -229,5 +302,6 @@ namespace Fw.Controllers
 
             return View();
         }
-	}
+        
+    }
 }
